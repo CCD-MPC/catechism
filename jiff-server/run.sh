@@ -1,4 +1,4 @@
 #!/bin/bash
 
 export NODE_PATH="/app/jiff/node_modules"
-node server.js
+node --max-old-space-size=8192 server.js

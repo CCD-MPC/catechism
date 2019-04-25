@@ -1,4 +1,4 @@
-from base64 import b64decode
+from base64 import b64decode, decode
 
 
 if __name__ == "__main__":
