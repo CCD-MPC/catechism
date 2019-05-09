@@ -3,14 +3,10 @@ from base64 import b64decode, decode
 
 if __name__ == "__main__":
 
+	print("\n\nDecoding protocol for Policy Engine.\n\n")
+
     protocol_encoded = open("/etc/config/protocol_policy", "r").read()
     protocol_decoded = b64decode(protocol_encoded).decode()
 
-    with open("/app/protocol.py", "w") as protocol_out:
+    with open("/app/protocol_policy.py", "w") as protocol_out:
         protocol_out.write(protocol_decoded)
-
-    conf_encoded = open("/etc/config/conf", "r").read()
-    conf_decoded = b64decode(conf_encoded).decode()
-
-    with open("/app/conf.json", "w") as conf_out:
-        conf_out.write(conf_decoded)
