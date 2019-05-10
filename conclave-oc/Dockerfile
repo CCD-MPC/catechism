@@ -38,4 +38,4 @@ RUN chown appuser:appuser -R /app \
 
 USER appuser
 
-CMD "bash"
+CMD "./run.sh"
