@@ -20,6 +20,12 @@ RUN cd /app \
     && git clone https://github.com/cici-conclave/conclave.git \
     && cd /app/conclave \
     && pip3 install -r requirements.txt \
+    && python3.5 setup.py develop
+
+RUN cd /app \
+    && git clone https://github.com/cici-conclave/conclave-data.git \
+    && cd /app/conclave-data \
+    && pip3 install -r requirements.txt \
     && pip3 install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
     && python3.5 setup.py develop
 
