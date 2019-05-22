@@ -4,13 +4,13 @@ sys.path.append("/app/conclave-data/")
 from conclave-data.swift import SwiftData
 from conclave-data.dataverse import DataverseData
 
-def post_swift_data(conclave_config):
+def post_swift_data(conf):
     """
     Store locally held data on Swift.
     """
 
-    swift_cfg = conclave_config.system_configs['swift'].dest
-    data_dir = conclave_config.input_path
+    swift_cfg = conf["dest"]
+    data_dir = "/data/"
     container = swift_cfg['data']['container_name']
 
     swift_data = SwiftData(swift_cfg)
@@ -31,18 +31,17 @@ def post_swift_data(conclave_config):
     swift_data.close_connection()
 
 
-
-def post_dataverse_data(conclave_config):
+def post_dataverse_data(conf):
     """
     Post output files to Dataverse.
 
     TODO: close connection?
     """
 
-    input_dv_files = conclave_config.system_configs['dataverse']['source']['files']
+    input_dv_files = conf['source']['files']
 
-    dv_conf = conclave_config.system_configs['dataverse']
-    data_dir = conclave_config.input_path
+    dv_conf = conf
+    data_dir = "/data/"
 
     dv_data = DataverseData(dv_conf)
 
@@ -52,3 +51,15 @@ def post_dataverse_data(conclave_config):
             if file[0] != '.':
                 if file not in input_dv_files:
                     dv_data.put_data(data_dir, file)
+
+def download_data(conf):
+
+    if conf["source"]["name"] == "dataverse":
+        download_dataverse_data(conf)
+    elif conf["source"]["name"] == "swift":
+        download_swift_data(conf)
+    else:
+        print("Backend not recognized: {} \n".format(conf["source"]["name"]))
+
+
+        
