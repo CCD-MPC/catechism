@@ -1,4 +1,6 @@
 import sys
+import os
+import operator
 sys.path.append("/app/conclave-data/")
 
 from conclave-data.swift import SwiftData
@@ -52,14 +54,3 @@ def post_dataverse_data(conf):
                 if file not in input_dv_files:
                     dv_data.put_data(data_dir, file)
 
-def download_data(conf):
-
-    if conf["source"]["name"] == "dataverse":
-        download_dataverse_data(conf)
-    elif conf["source"]["name"] == "swift":
-        download_swift_data(conf)
-    else:
-        print("Backend not recognized: {} \n".format(conf["source"]["name"]))
-
-
-        
