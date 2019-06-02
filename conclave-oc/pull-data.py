@@ -1,4 +1,5 @@
 import sys
+import json
 sys.path.append("/app/conclave-data/")
 
 from conclave-data.swift import SwiftData
@@ -12,13 +13,10 @@ def download_swift_data(conf):
     swift_cfg = conf["source"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
-    files = swift_cfg['data']['files']
+    files = swift_cfg['data']['file_name']
 
     swift_data = SwiftData(swift_cfg)
-
-    if files is not None:
-        for file in files:
-            swift_data.get_data(container, file, data_dir)
+    swift_data.get_data(container, file, data_dir)
 
     swift_data.close_connection()
 
@@ -47,5 +45,13 @@ def download_data(conf):
 
 if __name__ == "__main__":
 
-    conf = open("/app/data-conf.json", 'r').read()
-    download_data(conf)
+    conf = open("/app/in-conf.json", 'r').read()
+    auth_url = open("/etc/swift-auth/auth_url").read()
+    username = open("/etc/swift-auth/username").read()
+    password = open("/etc/swift-auth/password").read()
+
+    cfg_json = json.loads(conf)
+    cfg_json["auth"]["osAuthUrl"] = auth_url
+    cfg_json["auth"]["username"] = username
+    cfg_json["auth"]["password"] = password
+    download_data(cfg_json)
