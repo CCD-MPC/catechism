@@ -13,7 +13,7 @@ def download_swift_data(conf):
     swift_cfg = conf["source"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
-    files = swift_cfg['data']['file_name']
+    file = swift_cfg['data']['file_name']
 
     swift_data = SwiftData(swift_cfg)
     swift_data.get_data(container, file, data_dir)
