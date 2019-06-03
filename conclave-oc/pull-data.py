@@ -51,7 +51,7 @@ if __name__ == "__main__":
     password = open("/etc/swift-auth/password").read()
 
     cfg_json = json.loads(conf)
-    cfg_json["auth"]["osAuthUrl"] = auth_url
-    cfg_json["auth"]["username"] = username
-    cfg_json["auth"]["password"] = password
+    cfg_json["source"]["auth"]["osAuthUrl"] = auth_url
+    cfg_json["source"]["auth"]["username"] = username
+    cfg_json["source"]["auth"]["password"] = password
     download_data(cfg_json)
