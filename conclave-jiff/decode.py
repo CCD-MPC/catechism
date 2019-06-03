@@ -19,10 +19,10 @@ if __name__ == "__main__":
     in_conf_decoded = b64decode(in_conf_encoded).decode()
 
     with open("/app/in-conf.json", "w") as in_conf_out:
-    	in_conf_out.write(in_conf_decoded)
+        in_conf_out.write(in_conf_decoded)
 
     out_conf_encoded = open("/etc/config/out_conf", "r").read()
-    out_conf_decoded = b64decode(out_conf_decoded).decode()
+    out_conf_decoded = b64decode(out_conf_encoded).decode()
 
     with open("/app/out-conf.json", "w") as out_conf_out:
-    	out_conf_out.write(out_conf_decoded)
+        out_conf_out.write(out_conf_decoded)
