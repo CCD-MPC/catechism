@@ -1,9 +1,9 @@
 import sys
 import json
-sys.path.append("/app/conclave-data/")
+sys.path.append("/app/conclave_data/")
 
-from conclave-data.swift import SwiftData
-from conclave-data.dataverse import DataverseData
+from conclave_data.swift import SwiftData
+from conclave_data.dataverse import DataverseData
 
 def download_swift_data(conf):
     """

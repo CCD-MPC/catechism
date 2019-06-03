@@ -2,10 +2,10 @@ import sys
 import os
 import operator
 import json
-sys.path.append("/app/conclave-data/")
+sys.path.append("/app/conclave_data/")
 
-from conclave-data.swift import SwiftData
-from conclave-data.dataverse import DataverseData
+from conclave_data.swift import SwiftData
+from conclave_data.dataverse import DataverseData
 
 def post_swift_data(conf):
     """
