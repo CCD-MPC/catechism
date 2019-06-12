@@ -26,3 +26,6 @@ if __name__ == "__main__":
 
     with open("/app/out-conf.json", "w") as out_conf_out:
         out_conf_out.write(out_conf_decoded)
+
+    with open("/conf_vol/out-conf.json", "w") as prot_out:
+        prot_out.write(out_conf_decoded)

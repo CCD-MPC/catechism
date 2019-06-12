@@ -68,5 +68,7 @@ if __name__ == "__main__":
 
     conf = open("/app/out-conf.json", 'r').read()
     cfg_json = json.loads(conf)
-    post_data(cfg_json)
+
+    if conf["dest"]["pid"] == 1:
+        post_data(cfg_json)
 

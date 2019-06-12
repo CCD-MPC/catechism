@@ -42,8 +42,6 @@ RUN chown appuser:appuser -R /app \
 	&& chmod -R 777 /app \
 	&& chmod +x /app/run.sh
 
-RUN chmod -R 777 /etc
-
 USER appuser
 
 CMD "./run.sh"

@@ -28,7 +28,7 @@ RUN groupadd -g 666 appuser && \
 
 RUN chown appuser:appuser -R /app \
 	&& chmod -R 777 /app \
-	&& chmod +x /app/run.sh
+	&& chmod +x /app/run.sh 
 
 USER appuser
 
