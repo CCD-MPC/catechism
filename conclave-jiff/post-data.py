@@ -62,13 +62,13 @@ def post_data(conf):
     elif conf["dest"]["name"] == "swift":
         post_swift_data(conf)
     else:
-        print("Backend not recognized: {} \n".format(conf["source"]["name"]))
+        print("Backend not recognized: {} \n".format(conf["dest"]["name"]))
 
 if __name__ == "__main__":
 
     conf = open("/app/out-conf.json", 'r').read()
     cfg_json = json.loads(conf)
 
-    if conf["dest"]["pid"] == 1:
+    if conf["dest"]["pid"] == "1":
         post_data(cfg_json)
 
