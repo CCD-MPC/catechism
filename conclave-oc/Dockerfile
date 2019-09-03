@@ -8,7 +8,9 @@ RUN apt-get update \
 	&& apt-get -y install git \
 	&& apt-cache show python3 \
 	&& apt-get -y install python3=3.5.1* \
-	&& apt-get install -y python3-pip
+	&& apt-get install -y python3-pip \
+    && apt-get install -y iputils-ping \
+    && apt-get install -y nmap
 
 RUN cd /app \
 	&& git clone https://github.com/cici-conclave/conclave.git \
@@ -44,4 +46,4 @@ RUN chown appuser:appuser -R /app \
 
 USER appuser
 
-CMD "./run.sh"
+CMD "./run.sh > /data/log.txt"

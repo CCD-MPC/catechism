@@ -7,6 +7,7 @@ sys.path.append("/app/conclave_data/")
 from conclave_data.swift import SwiftData
 from conclave_data.dataverse import DataverseData
 
+
 def post_swift_data(conf):
     """
     Store locally held data on Swift.
@@ -34,16 +35,16 @@ def post_swift_data(conf):
     swift_data.close_connection()
 
 
-def post_dataverse_data(conf):
+def post_dataverse_data(c):
     """
     Post output files to Dataverse.
 
     TODO: close connection?
     """
 
-    input_dv_files = conf['source']['files']
+    input_dv_files = c['source']['files']
 
-    dv_conf = conf
+    dv_conf = c
     data_dir = "/data/"
 
     dv_data = DataverseData(dv_conf)
@@ -55,14 +56,14 @@ def post_dataverse_data(conf):
                 if file not in input_dv_files:
                     dv_data.put_data(data_dir, file)
 
-def post_data(conf):
+def post_data(c):
 
-    if conf["dest"]["name"] == "dataverse":
-        post_dataverse_data(conf)
-    elif conf["dest"]["name"] == "swift":
-        post_swift_data(conf)
+    if c["dest"]["name"] == "dataverse":
+        post_dataverse_data(c)
+    elif c["dest"]["name"] == "swift":
+        post_swift_data(c)
     else:
-        print("Backend not recognized: {} \n".format(conf["dest"]["name"]))
+        print("Backend not recognized: {} \n".format(c["dest"]["name"]))
 
 if __name__ == "__main__":
 

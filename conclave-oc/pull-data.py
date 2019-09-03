@@ -5,12 +5,13 @@ sys.path.append("/app/conclave_data/")
 from conclave_data.swift import SwiftData
 from conclave_data.dataverse import DataverseData
 
-def download_swift_data(conf):
+
+def download_swift_data(c):
     """
     Download data from Swift to local filesystem.
     """
 
-    swift_cfg = conf["source"]
+    swift_cfg = c["source"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
     file = swift_cfg['data']['file_name']
@@ -20,27 +21,29 @@ def download_swift_data(conf):
 
     swift_data.close_connection()
 
-def download_dataverse_data(conf):
+
+def download_dataverse_data(c):
     """
     Download files from Dataverse.
 
     TODO: close connection?
     """
 
-    dv_conf = conf["source"]
+    dv_conf = c["source"]
     data_dir = "/data/"
 
     dv_data = DataverseData(dv_conf)
     dv_data.get_data(data_dir)
 
-def download_data(conf):
 
-    if conf["source"]["name"] == "dataverse":
-        download_dataverse_data(conf)
-    elif conf["source"]["name"] == "swift":
-        download_swift_data(conf)
+def download_data(c):
+
+    if c["source"]["name"] == "dataverse":
+        download_dataverse_data(c)
+    elif c["source"]["name"] == "swift":
+        download_swift_data(c)
     else:
-        print("Backend not recognized: {} \n".format(conf["source"]["name"]))
+        print("Backend not recognized: {} \n".format(c["source"]["name"]))
 
 
 if __name__ == "__main__":
