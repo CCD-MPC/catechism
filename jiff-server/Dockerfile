@@ -5,12 +5,14 @@ WORKDIR /app
 COPY . /app
 
 RUN apt-get update \
-	&& apt-get -qq -y install curl
+	&& apt-get -qq -y install curl \
+    && apt-get install -y iputils-ping \
+    && apt-get install -y nmap
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
 RUN apt-get -y install nodejs \
-	&& apt-get -y install git
+	&& apt-get -y install git 
 
 RUN cd /app \
     && git clone https://github.com/multiparty/jiff.git \
