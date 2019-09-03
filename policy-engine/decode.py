@@ -10,6 +10,3 @@ if __name__ == "__main__":
 
 	with open("/app/protocol_policy.py", "w") as protocol_out:
 		protocol_out.write(protocol_decoded)
-
-    # with open("/conf_vol/protocol_policy.py", "w") as policy_out:
-    #     policy_out.write(protocol_decoded)
