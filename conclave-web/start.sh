@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /app/conclave-web
-gunicorn -b 0.0.0.0:8080 -c /app/conclave-web/config.py -e PYTHONBUFFERED=TRUE wsgi:app
+cd /app/chamberlain
+gunicorn -b 0.0.0.0:8080 -c /app/chamberlain/config.py -e PYTHONBUFFERED=TRUE wsgi:app

@@ -13,9 +13,9 @@ RUN apt-get update \
     && apt-get install -y nmap
 
 RUN cd /app \
-    && git clone https://github.com/cici-conclave/conclave-web.git 
+    && git clone https://github.com/cici-conclave/chamberlain.git 
 
-RUN cd /app/conclave-web \
+RUN cd /app/chamberlain \
     && pip3 install -r requirements.txt
 
 RUN mkdir /etc/swift-config/
