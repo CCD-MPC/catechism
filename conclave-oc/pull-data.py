@@ -1,7 +1,7 @@
 import sys
 import json
-sys.path.append("/app/conclave_data/")
 
+sys.path.append("/app/conclave_data/")
 from conclave_data.swift import SwiftData
 from conclave_data.dataverse import DataverseData
 

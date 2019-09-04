@@ -2,18 +2,18 @@ import sys
 import os
 import operator
 import json
-sys.path.append("/app/conclave_data/")
 
+sys.path.append("/app/conclave_data/")
 from conclave_data.swift import SwiftData
 from conclave_data.dataverse import DataverseData
 
 
-def post_swift_data(conf):
+def post_swift_data(c):
     """
     Store locally held data on Swift.
     """
 
-    swift_cfg = conf["dest"]
+    swift_cfg = c["dest"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
 
@@ -56,6 +56,7 @@ def post_dataverse_data(c):
                 if file not in input_dv_files:
                     dv_data.put_data(data_dir, file)
 
+
 def post_data(c):
 
     if c["dest"]["name"] == "dataverse":
@@ -64,6 +65,7 @@ def post_data(c):
         post_swift_data(c)
     else:
         print("Backend not recognized: {} \n".format(c["dest"]["name"]))
+
 
 if __name__ == "__main__":
 

@@ -60,4 +60,5 @@ if __name__ == "__main__":
     cfg_json["source"]["auth"]["osAuthUrl"] = auth_url
     cfg_json["source"]["auth"]["username"] = username
     cfg_json["source"]["auth"]["password"] = password
+
     download_data(cfg_json)
