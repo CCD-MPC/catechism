@@ -3,13 +3,7 @@ from base64 import b64decode
 
 if __name__ == "__main__":
 
-    print("\n\nDecoding protocol for Policy Engine.\n\n")
-
-    policy_encoded = open("/etc/workflow/protocol_policy", "r").read()
-    policy_decoded = b64decode(policy_encoded).decode()
-
-    with open("/data/protocol_policy.py", "w") as policy_out:
-        policy_out.write(policy_decoded)
+    print("\n\nDecoding protocol.\n\n")
 
     protocol_encoded = open("/etc/workflow/protocol", "r").read()
     protocol_decoded = b64decode(protocol_encoded).decode()
