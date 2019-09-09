@@ -39,27 +39,25 @@ def download_dataverse_data(c):
     dv_data.get_data(data_dir)
 
 
-def download_data(c):
-
-    if c["backends"]["data"] == "dataverse":
-        download_dataverse_data(c)
-    elif c["backends"]["data"] == "swift":
-        download_swift_data(c)
-    else:
-        raise Exception("Backend not recognized: {} \n".format(c["backends"]["data"]))
-
-
 if __name__ == "__main__":
-
-    auth_url = open("/etc/swift-auth/auth_url").read()
-    username = open("/etc/swift-auth/username").read()
-    password = open("/etc/swift-auth/password").read()
 
     conf = open("/data/conf.json", 'r').read()
     cfg_json = json.loads(conf)
 
-    cfg_json["swift"]["source"]["auth"]["osAuthUrl"] = auth_url
-    cfg_json["swift"]["source"]["auth"]["username"] = username
-    cfg_json["swift"]["source"]["auth"]["password"] = password
+    if cfg_json["backends"]["data"] == "dataverse":
 
-    download_data(cfg_json)
+        # TODO: update conf with dv auth token
+        download_dataverse_data(cfg_json)
+
+    elif cfg_json["backends"]["data"] == "swift":
+        auth_url = open("/etc/swift-auth/auth_url").read()
+        username = open("/etc/swift-auth/username").read()
+        password = open("/etc/swift-auth/password").read()
+        cfg_json["swift"]["source"]["auth"]["osAuthUrl"] = auth_url
+        cfg_json["swift"]["source"]["auth"]["username"] = username
+        cfg_json["swift"]["source"]["auth"]["password"] = password
+
+        download_swift_data(cfg_json)
+
+    else:
+        raise Exception("Backend not recognized: {} \n".format(c["backends"]["data"]))
