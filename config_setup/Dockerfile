@@ -11,14 +11,13 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m virtualenv --python=/usr/bin/python3 $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN apt-get -y install git \
-    && apt-get install -y iputils-ping \
-    && apt-get install -y nmap
+RUN apt-get -y install git 
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/config_setup.git \
-	&& cd /app/config_setup \
+	&& git clone https://github.com/cici-conclave/conclave_data.git \
+	&& cd /app/conclave_data \
 	&& pip install -r requirements.txt \
+	&& pip install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
 	&& python setup.py develop
 
 RUN groupadd -g 666 appuser && \
@@ -28,10 +27,6 @@ RUN chown appuser:appuser -R /app \
 	&& chmod -R 777 /app \
 	&& chmod +x /app/run.sh
 
-RUN mkdir /etc/protocol_config
-
-RUN chmod -R 777 /etc/protocol_config
-
 USER appuser
 
-CMD ["bash", "run.sh"]
+CMD "./run.sh"

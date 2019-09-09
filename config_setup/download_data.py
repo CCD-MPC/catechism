@@ -1,7 +1,7 @@
 import sys
 import json
-
 sys.path.append("/app/conclave_data/")
+
 from conclave_data.swift import SwiftData
 from conclave_data.dataverse import DataverseData
 
@@ -11,13 +11,16 @@ def download_swift_data(c):
     Download data from Swift to local filesystem.
     """
 
-    swift_cfg = c["source"]
-    data_dir = "/data/"
+    swift_cfg = c["swift"]["source"]
     container = swift_cfg['data']['container_name']
     file = swift_cfg['data']['file_name']
 
+    fname = ".".join(file.split(".")[:-1])
+    pname = ".".join([fname, "json"])
+
     swift_data = SwiftData(swift_cfg)
-    swift_data.get_data(container, file, data_dir)
+    swift_data.get_data(container, pname, "/data/", "policy.json")
+    swift_data.get_data(container, file, "/data/", file)
 
     swift_data.close_connection()
 
@@ -38,23 +41,25 @@ def download_dataverse_data(c):
 
 def download_data(c):
 
-    if c["source"]["name"] == "dataverse":
+    if c["backends"]["data"] == "dataverse":
         download_dataverse_data(c)
-    elif c["source"]["name"] == "swift":
+    elif c["backends"]["data"] == "swift":
         download_swift_data(c)
     else:
-        print("Backend not recognized: {} \n".format(c["source"]["name"]))
+        raise Exception("Backend not recognized: {} \n".format(c["backends"]["data"]))
 
 
 if __name__ == "__main__":
 
-    conf = open("/app/in-conf.json", 'r').read()
     auth_url = open("/etc/swift-auth/auth_url").read()
     username = open("/etc/swift-auth/username").read()
     password = open("/etc/swift-auth/password").read()
 
+    conf = open("/data/conf.json", 'r').read()
     cfg_json = json.loads(conf)
-    cfg_json["source"]["auth"]["osAuthUrl"] = auth_url
-    cfg_json["source"]["auth"]["username"] = username
-    cfg_json["source"]["auth"]["password"] = password
+
+    cfg_json["swift"]["source"]["auth"]["osAuthUrl"] = auth_url
+    cfg_json["swift"]["source"]["auth"]["username"] = username
+    cfg_json["swift"]["source"]["auth"]["password"] = password
+
     download_data(cfg_json)

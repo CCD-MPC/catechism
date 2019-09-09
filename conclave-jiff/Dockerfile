@@ -35,6 +35,12 @@ RUN cd /app \
     && python setup.py develop
 
 RUN cd /app \
+    && git clone https://github.com/cici-conclave/policy_engine.git \
+    && cd /app/policy_engine \
+    && pip install -r requirements.txt \
+    && python setup.py develop
+
+RUN cd /app \
     && git clone https://github.com/multiparty/jiff.git \
     && cd /app/jiff \
     && npm install

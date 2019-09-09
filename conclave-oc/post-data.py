@@ -71,7 +71,7 @@ def post_data(c):
 
 if __name__ == "__main__":
 
-    conf = open("/app/conf.json", 'r').read()
+    conf = open("/data/conf.json", 'r').read()
     cfg_json = json.loads(conf)
 
     data_backend = cfg_json["backends"]["data"]

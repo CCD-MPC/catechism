@@ -1,6 +1,4 @@
 #!/bin/bash
 
-python /app/decode.py
-python /app/pull-data.py
-python /app/protocol.py --conf /app/conf.json
+python /data/protocol.py /data/conf.json /data/policy.json
 python /app/post-data.py

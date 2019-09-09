@@ -28,6 +28,12 @@ RUN cd /app \
 	&& pip install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
 	&& python setup.py develop
 
+RUN cd /app \
+	&& git clone https://github.com/cici-conclave/policy_engine.git \
+	&& cd /app/policy_engine \
+	&& pip install -r requirements.txt \
+	&& python setup.py develop
+
 RUN apt-get -y install ocaml libgcrypt20-dev \
 	&& apt-get -y install ocaml-findlib opam m4
 
@@ -49,4 +55,4 @@ RUN chown appuser:appuser -R /app \
 
 USER appuser
 
-CMD "./run.sh > /data/log.txt"
+CMD "./run.sh"

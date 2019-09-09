@@ -1,3 +1,4 @@
 #!/bin/bash
 
-python /app/config_setup/decode.py
+python /app/decode.py
+python /app/download_data.py

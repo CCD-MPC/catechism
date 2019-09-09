@@ -13,7 +13,7 @@ def post_swift_data(c):
     Store locally held data on Swift.
     """
 
-    swift_cfg = c["dest"]
+    swift_cfg = c["swift"]["dest"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
 
@@ -59,19 +59,23 @@ def post_dataverse_data(c):
 
 def post_data(c):
 
-    if c["dest"]["name"] == "dataverse":
+    data_backend = c["backends"]["data"]
+
+    if data_backend == "dataverse":
         post_dataverse_data(c)
-    elif c["dest"]["name"] == "swift":
+    elif data_backend == "swift":
         post_swift_data(c)
     else:
-        print("Backend not recognized: {} \n".format(c["dest"]["name"]))
+        raise Exception("Backend not recognized: {} \n".format(c["backends"]["data"]))
 
 
 if __name__ == "__main__":
 
-    conf = open("/app/out-conf.json", 'r').read()
+    conf = open("/data/conf.json", 'r').read()
     cfg_json = json.loads(conf)
 
-    if cfg_json["dest"]["pid"] == 1:
+    data_backend = cfg_json["backends"]["data"]
+
+    if cfg_json[data_backend]["dest"]["pid"] == 1:
         post_data(cfg_json)
 
