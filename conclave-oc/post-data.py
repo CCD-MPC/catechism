@@ -13,7 +13,7 @@ def post_swift_data(c):
     Store locally held data on Swift.
     """
 
-    swift_cfg = c["swift"]["dest"]
+    swift_cfg = c["dest"]
     data_dir = "/data/"
     container = swift_cfg['data']['container_name']
 
@@ -35,36 +35,15 @@ def post_swift_data(c):
     swift_data.close_connection()
 
 
-def post_dataverse_data(c):
-    """
-    Post output files to Dataverse.
-
-    TODO: close connection?
-    """
-
-    input_dv_files = c['source']['files']
-
-    dv_conf = c
-    data_dir = "/data/"
-
-    dv_data = DataverseData(dv_conf)
-
-    for subdir, dirs, files in os.walk(data_dir):
-        for file in files:
-            print(file)
-            if file[0] != '.':
-                if file not in input_dv_files:
-                    dv_data.put_data(data_dir, file)
-
-
 def post_data(c):
 
     data_backend = c["backends"]["data"]
 
     if data_backend == "dataverse":
-        post_dataverse_data(c)
+        # TODO: update this to DV code if we want to push to DV in the future.
+        post_swift_data(c["swift"])
     elif data_backend == "swift":
-        post_swift_data(c)
+        post_swift_data(c["swift"])
     else:
         raise Exception("Backend not recognized: {} \n".format(c["backends"]["data"]))
 
@@ -74,8 +53,6 @@ if __name__ == "__main__":
     conf = open("/data/conf.json", 'r').read()
     cfg_json = json.loads(conf)
 
-    data_backend = cfg_json["backends"]["data"]
-
-    if cfg_json[data_backend]["dest"]["pid"] == 1:
+    if cfg_json["user_config"]["pid"] == 1:
         post_data(cfg_json)
 
