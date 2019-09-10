@@ -32,11 +32,15 @@ def download_dataverse_data(c):
     TODO: close connection?
     """
 
-    dv_conf = c["source"]
-    data_dir = "/data/"
+    dv_cfg = c["dataverse"]["source"]
 
-    dv_data = DataverseData(dv_conf)
-    dv_data.get_data(data_dir)
+    file = swift_cfg['data']['file_name']
+    fname = ".".join(file.split(".")[:-1])
+    pname = ".".join([fname, "json"])
+
+    dv_data = DataverseData(dv_cfg)
+    dv_data.get_data(file, "/data/", file)
+    dv_data.get_data(pname, "/data/", "policy.json")
 
 
 if __name__ == "__main__":
