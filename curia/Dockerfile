@@ -14,8 +14,8 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN apt-get -y install git 
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/provenance.git \
-	&& cd /app/provenance \
+	&& git clone https://github.com/cici-conclave/curia.git \
+	&& cd /app/curia \
 	&& pip install -r requirements.txt \
 	&& pip install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
 	&& python setup.py develop
