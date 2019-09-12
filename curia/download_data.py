@@ -1,9 +1,9 @@
 import sys
 import json
-sys.path.append("/app/conclave_data/")
+sys.path.append("/app/curia/")
 
-from conclave_data.swift import SwiftData
-from conclave_data.dataverse import DataverseData
+from curia.swift import SwiftData
+from curia.dataverse import DataverseData
 
 
 def download_swift_data(c):

@@ -22,15 +22,15 @@ RUN cd /app \
 	&& python setup.py develop
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/conclave_data.git \
-	&& cd /app/conclave_data \
+	&& git clone https://github.com/cici-conclave/curia.git \
+	&& cd /app/curia \
 	&& pip install -r requirements.txt \
 	&& pip install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
 	&& python setup.py develop
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/policy_engine.git \
-	&& cd /app/policy_engine \
+	&& git clone https://github.com/cici-conclave/dogma.git \
+	&& cd /app/dogma \
 	&& pip install -r requirements.txt \
 	&& python setup.py develop
 

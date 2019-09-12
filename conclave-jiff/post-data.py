@@ -3,9 +3,9 @@ import os
 import operator
 import json
 
-sys.path.append("/app/conclave_data/")
-from conclave_data.swift import SwiftData
-from conclave_data.dataverse import DataverseData
+sys.path.append("/app/curia/")
+from curia.swift import SwiftData
+from curia.dataverse import DataverseData
 
 
 def post_swift_data(c):
