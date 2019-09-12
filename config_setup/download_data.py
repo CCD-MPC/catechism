@@ -19,8 +19,8 @@ def download_swift_data(c):
     pname = ".".join([fname, "json"])
 
     swift_data = SwiftData(swift_cfg)
-    swift_data.get_data(container, pname, "/data/", "policy.json")
     swift_data.get_data(container, file, "/data/", file)
+    swift_data.get_data(container, pname, "/data/", "policy.json")
 
     swift_data.close_connection()
 
@@ -34,7 +34,7 @@ def download_dataverse_data(c):
 
     dv_cfg = c["dataverse"]["source"]
 
-    file = swift_cfg['data']['file_name']
+    file = dv_cfg['data']['file_name']
     fname = ".".join(file.split(".")[:-1])
     pname = ".".join([fname, "json"])
 
@@ -50,7 +50,11 @@ if __name__ == "__main__":
 
     if cfg_json["backends"]["data"] == "dataverse":
 
-        # TODO: update conf with dv auth token
+        dv_host = open("/etc/dv-auth/host").read()
+        dv_token = open("/etc/dv-auth/token").read()
+        cfg_json["dataverse"]["source"]["auth"]["host"] = dv_host
+        cfg_json["dataverse"]["source"]["auth"]["token"] = dv_token
+
         download_dataverse_data(cfg_json)
 
     elif cfg_json["backends"]["data"] == "swift":
