@@ -50,8 +50,8 @@ if __name__ == "__main__":
 
     if cfg_json["backends"]["data"] == "dataverse":
 
-        dv_host = open("/etc/dv-auth/host").read()
-        dv_token = open("/etc/dv-auth/token").read()
+        dv_host = open("/etc/dataverse-auth/dv_host").read()
+        dv_token = open("/etc/dataverse-auth/dv_token").read()
         cfg_json["dataverse"]["source"]["auth"]["host"] = dv_host
         cfg_json["dataverse"]["source"]["auth"]["token"] = dv_token
 
