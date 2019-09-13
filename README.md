@@ -1,2 +1,2 @@
-# docker
-All dockerfiles related to C2D deployment
+# catechism
+all dockerfiles related to CCD deployment
