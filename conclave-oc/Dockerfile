@@ -16,20 +16,20 @@ RUN apt-get -y install git \
     && apt-get install -y nmap
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/conclave.git \
+	&& git clone https://github.com/CCD-MPC/conclave.git \
 	&& cd /app/conclave \
 	&& pip install -r requirements.txt \
 	&& python setup.py develop
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/curia.git \
+	&& git clone https://github.com/CCD-MPC/curia.git \
 	&& cd /app/curia \
 	&& pip install -r requirements.txt \
 	&& pip install -e git+https://github.com/IQSS/dataverse-client-python.git#egg=dataverse \
 	&& python setup.py develop
 
 RUN cd /app \
-	&& git clone https://github.com/cici-conclave/dogma.git \
+	&& git clone https://github.com/CCD-MPC/dogma.git \
 	&& cd /app/dogma \
 	&& pip install -r requirements.txt \
 	&& python setup.py develop

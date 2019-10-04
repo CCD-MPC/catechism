@@ -16,7 +16,7 @@ RUN apt-get -y install git \
     && apt-get install -y nmap
 
 RUN cd /app \
-    && git clone https://github.com/cici-conclave/chamberlain.git
+    && git clone https://github.com/CCD-MPC/chamberlain.git
 
 RUN cd /app/chamberlain \
     && pip install -r requirements.txt
