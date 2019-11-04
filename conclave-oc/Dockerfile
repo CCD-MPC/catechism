@@ -16,7 +16,7 @@ RUN apt-get -y install git \
     && apt-get install -y nmap
 
 RUN cd /app \
-	&& git clone https://github.com/CCD-MPC/conclave.git \
+	&& git clone https://github.com/multiparty/conclave.git \
 	&& cd /app/conclave \
 	&& pip install -r requirements.txt \
 	&& python setup.py develop
